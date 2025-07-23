@@ -1,36 +1,68 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Resource Booking Frontend
+
+A mini full-stack web application that allows users to book shared resources (like rooms or devices) with conflict and buffer-time detection.
+
+##  Live Demo
+
+ [https://resource-booking.vercel.app](https://resource-booking.vercel.app)
+
+##  Features
+
+-  Book resources with start and end datetime
+-  Prevents overlapping bookings using buffer logic
+-  Buffer Time Logic: Adds 10-minute buffer before and after each booking
+-  Filter bookings by resource or date
+-  Shows status tags — **Upcoming**, **Ongoing**, or **Past**
+-  Sorts bookings by upcoming time
+-  Option to cancel/delete a booking
+-  Weekly calendar view (Bonus)
+-  Real-time feedback and error messages
+
+## UI Stack
+
+- [Next.js](https://nextjs.org/) (App Router)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Axios](https://axios-http.com/)
+- [Shadcn](https://ui.shadcn.com/)
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+- Node.js v18+
+- npm
+
+### Installation
 
 ```bash
+git clone https://github.com/mozammel787/Resource-Booking.git
+cd Resource-Booking
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+
+This will start the development server at http://localhost:3000
+
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## API
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+[https://resource-booking-server.vercel.app](https://resource-booking-server.vercel.app)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Booking Form Fields
 
-## Learn More
+- Resource – Dropdown with sample values
 
-To learn more about Next.js, take a look at the following resources:
+- Start Time – DateTime-local input
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- End Time – DateTime-local input
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- Requested By – Text input
 
-## Deploy on Vercel
+## Validation
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- End Time > Start Time
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Duration ≥ 15 minutes
+
+- No conflict (includes 10-min buffer before/after)

@@ -34,8 +34,7 @@ const BookingCard = ({ event, handleDelete }: { event: BookingEvent; handleDelet
 
   return (
     <div
-      key={_id}
-      className={`relative rounded-md p-2 pl-6 text-sm bg-muted after:absolute after:inset-y-2 after:left-2 after:w-1 after:rounded-full flex  justify-between items-center gap-1 w-64 shadow hover:shadow-md  ${resource === "Conference Hall" ? "after:bg-green-600" : resource === "Training Room" ? "after:bg-blue-500" : resource === "Interview Room" ? "after:bg-purple-500" : resource === "Meeting Room" ? "after:bg-black" : "after:bg-yellow-500"}`}
+      className={`relative rounded-md p-2 pl-6 text-sm bg-muted after:absolute after:inset-y-2 after:left-2 after:w-1 after:rounded-full flex  justify-between items-center gap-1 w-64 shadow hover:shadow-md bg-g  ${resource === "Conference Hall" ? "after:bg-green-600" : resource === "Training Room" ? "after:bg-blue-500" : resource === "Interview Room" ? "after:bg-purple-500" : resource === "Meeting Room" ? "after:bg-black" : "after:bg-yellow-500"}`}
     >
       <div className="space-y-1">
         <Badge className={`${status === "Upcoming" ? "bg-blue-500/10 text-blue-600 border border-blue-200" : status === "Ongoing" ? "bg-green-500/10 text-green-600 border border-green-200" : "bg-black/10 text-gray-500 border border-black/10"}`}>{status}</Badge>

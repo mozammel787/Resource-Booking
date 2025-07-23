@@ -124,7 +124,7 @@ export default function BookingFrom() {
           <DropdownMenuTrigger asChild>
             <Button variant="outline" className="w-full justify-start font-normal text-gray-500 ">{resource || "Select Resource"}</Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent className="w-[400px]">
+          <DropdownMenuContent className="w-full md:w-[400px]">
             <DropdownMenuLabel>Resource List</DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuRadioGroup value={resource} onValueChange={setResource}>
@@ -147,7 +147,7 @@ export default function BookingFrom() {
             disabled={{
               before: new Date(),
             }}
-            className="bg-transparent p-0 [--cell-size:--spacing(10.5)] w-[440px] "
+            className="bg-transparent p-0 [--cell-size:--spacing(10.5)] md:w-[440px] "
           />
         </CardContent>
         <CardFooter className="flex gap-2 border-t px-4 !pt-4 *:[div]:w-full">

@@ -36,6 +36,7 @@ type BookingEvent = {
 
 
 export default function BookingList() {
+  const [loading, setLoading] = React.useState<boolean>(true);
   const [bookings, setBookings] = React.useState<BookingEvent[]>([]);
   const [filteredEvents, setFilteredEvents] = React.useState<BookingEvent[]>([]);
   const [resource, setResource] = React.useState<string>("");
@@ -50,10 +51,13 @@ export default function BookingList() {
 
   const fetchData = async () => {
     try {
+      setLoading(true);
       const response = await axios.get("https://resource-booking-server.vercel.app/bookings")
       setBookings(response.data)
     } catch (error) {
       console.error("Error fetching data:", error)
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -74,8 +78,10 @@ export default function BookingList() {
 
 
   React.useEffect(() => {
+
     const fetchAndFilterEvents = async () => {
       try {
+        setLoading(true);
         let data = [...bookings]; // Start with all bookings
 
         // Apply resource filter
@@ -105,6 +111,8 @@ export default function BookingList() {
         setFilteredEvents(data);
       } catch (error) {
         console.error("Error filtering events:", error);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -118,9 +126,13 @@ export default function BookingList() {
   const handleDelete = async (_id: number) => {
 
     try {
+      setLoading(true);
       const response = await axios.delete(`https://resource-booking-server.vercel.app/booking-delete/${_id}`)
     } catch (error) {
       console.error("Delete Fail", error)
+    }
+    finally {
+      setLoading(false);
     }
     fetchData()
   }
@@ -136,10 +148,10 @@ export default function BookingList() {
 
 
   return (
-    <div className="flex flex-col items-center justify-center space-y-4 ">
+    <div className="flex flex-col items-center justify-center space-y-4 w-full ">
 
 
-      <div className="flex items-center justify-between w-full ">
+      <div className="flex items-center justify-between w-full flex-wrap gap-2">
         <div>
           <DropdownMenu>
             <span className="mr-2">Filter by Resource :</span>
@@ -164,7 +176,7 @@ export default function BookingList() {
 
 
         <div className="flex items-center gap-3">
-          <span className="px-1">
+          <span className="">
             Filter by Date :
           </span>
           <Popover open={open} onOpenChange={setOpen}>
@@ -226,7 +238,9 @@ export default function BookingList() {
 
       </div>
 
-      <Card className="w-[1300px] flex flex-row  items-start p-0 border-0 shadow-none ">
+      <Card className=" w-full flex flex-row  items-start p-0 border-0 shadow-none ">
+
+
 
 
         <CardFooter className="flex flex-col items-start  gap-3 p-0  w-full">
@@ -241,24 +255,31 @@ export default function BookingList() {
                 year: "numeric",
               })}
             </div>
-
-
           </div>
-          {Object?.keys(groupedByResource).length > 0 ? (
-            Object.entries(groupedByResource).map(([resourceName, events]) => (
-              <div key={resourceName} className="w-full mb-4">
-                <h2 className="text-md font-semibold mb-2">{resourceName}</h2>
-                <div className="flex flex-wrap gap-4">
-                  {events.map((event) => (
-                    <BookingCard key={event._id} event={event} handleDelete={handleDelete} />
-                  ))}
-                </div>
-              </div>
-            ))
+          {loading ? (
+            <div className="loader absolute top-1/2 right-1/2"></div>
+
           ) : (
-            <div className="text-gray-400 text-xs">No bookings found.</div>
+            <>
+
+              {Object.keys(groupedByResource).length > 0 ? (
+                Object.entries(groupedByResource).map(([resourceName, events]) => (
+                  <div key={resourceName} className="w-full mb-4">
+                    <h2 className="text-md font-semibold mb-2">{resourceName}</h2>
+                    <div className="flex flex-wrap gap-4">
+                      {events.map((event) => (
+                        <BookingCard key={event._id} event={event} handleDelete={handleDelete} />
+                      ))}
+                    </div>
+                  </div>
+                ))
+              ) : (
+                <div className="text-gray-400 text-xs">No bookings found.</div>
+              )}
+            </>
           )}
         </CardFooter>
+
       </Card>
     </div>
   )
