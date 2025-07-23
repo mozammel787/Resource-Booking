@@ -1,68 +1,53 @@
-# Resource Booking Frontend
+# Resource Booking System - Frontend
 
-A mini full-stack web application that allows users to book shared resources (like rooms or devices) with conflict and buffer-time detection.
+Book shared resources like meeting rooms with conflict detection and buffer time.
 
-##  Live Demo
+## 🚀 Live Demo
+- **App**: https://resource-booking.vercel.app/
+- **API**: https://resource-booking-server.vercel.app/
 
- [https://resource-booking.vercel.app](https://resource-booking.vercel.app)
+## Features
+- Book resources with date/time picker
+- View all bookings in dashboard
+- Filter by resource and date
+- Prevents overlapping bookings (10-min buffer)
+- Status indicators (upcoming/ongoing/past)
 
-##  Features
+## Tech Stack
+- Next.js 14 + TypeScript
+- Tailwind CSS
+- React Hooks
 
--  Book resources with start and end datetime
--  Prevents overlapping bookings using buffer logic
--  Buffer Time Logic: Adds 10-minute buffer before and after each booking
--  Filter bookings by resource or date
--  Shows status tags — **Upcoming**, **Ongoing**, or **Past**
--  Sorts bookings by upcoming time
--  Option to cancel/delete a booking
--  Weekly calendar view (Bonus)
--  Real-time feedback and error messages
+## Quick Start
 
-## UI Stack
+1. **Clone & Install**
+   ```bash
+   git clone https://github.com/mozammel787/Resource-Booking.git
+   cd Resource-Booking
+   npm install
+   ```
 
-- [Next.js](https://nextjs.org/) (App Router)
-- [Tailwind CSS](https://tailwindcss.com/)
-- [TypeScript](https://www.typescriptlang.org/)
-- [Axios](https://axios-http.com/)
-- [Shadcn](https://ui.shadcn.com/)
+2. **Run**
+   ```bash
+   npm run dev
+   ```
+   Open http://localhost:3000
 
-## Getting Started
+## How It Works
+- Select resource, time, and your name
+- System checks for conflicts (includes 10-min buffer)
+- View all bookings in dashboard
+- Filter and sort bookings
 
-### Prerequisites
-
-- Node.js v18+
-- npm
-
-### Installation
-
+## Scripts
 ```bash
-git clone https://github.com/mozammel787/Resource-Booking.git
-cd Resource-Booking
-npm install
-npm run dev
-
-This will start the development server at http://localhost:3000
-
+npm run dev    # Development
+npm run build  # Build for production
+npm start      # Production server
 ```
 
-## API
+## Deployment
+Deploy to Vercel and set `NEXT_PUBLIC_API_URL` to your backend URL.
 
-[https://resource-booking-server.vercel.app](https://resource-booking-server.vercel.app)
-
-## Booking Form Fields
-
-- Resource – Dropdown with sample values
-
-- Start Time – DateTime-local input
-
-- End Time – DateTime-local input
-
-- Requested By – Text input
-
-## Validation
-
-- End Time > Start Time
-
-- Duration ≥ 15 minutes
-
-- No conflict (includes 10-min buffer before/after)
+---
+Built with Next.js + TypeScript
