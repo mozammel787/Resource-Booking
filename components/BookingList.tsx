@@ -50,7 +50,7 @@ export default function BookingList() {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/bookings")
+      const response = await axios.get("https://resource-booking-server.vercel.app/bookings")
       setBookings(response.data)
     } catch (error) {
       console.error("Error fetching data:", error)
@@ -118,7 +118,7 @@ export default function BookingList() {
   const handleDelete = async (_id: number) => {
 
     try {
-      const response = await axios.delete(`http://localhost:5000/booking-delete/${_id}`)
+      const response = await axios.delete(`https://resource-booking-server.vercel.app/booking-delete/${_id}`)
     } catch (error) {
       console.error("Delete Fail", error)
     }

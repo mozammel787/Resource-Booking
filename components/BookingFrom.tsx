@@ -72,7 +72,7 @@ export default function BookingFrom() {
   const handleSubmit = async () => {
 
     try {
-      const response = await axios.post("http://localhost:5000/bookings", {
+      const response = await axios.post("https://resource-booking-server.vercel.app/bookings", {
         requestedBy: requested,
         resource: resource,
         date: formattedDate,
